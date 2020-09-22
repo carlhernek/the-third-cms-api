@@ -2,6 +2,7 @@
 
 namespace the_third_cms_api.Models
 {
+
     public class BaseModel : IBaseModel
     {
         public Guid Id { get; set; }
@@ -9,5 +10,6 @@ namespace the_third_cms_api.Models
         public Guid ModifiedBy { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
+
     }
 }
