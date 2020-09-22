@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>the_third_cms_api</RootNamespace>
+    
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +14,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.7.4" />
+    <PackageReference Include="NSwag.Core" Version="13.7.4" />
   </ItemGroup>
 
 
