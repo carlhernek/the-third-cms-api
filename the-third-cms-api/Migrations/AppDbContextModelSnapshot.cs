@@ -32,6 +32,7 @@ namespace the_third_cms_api.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ItemData")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ItemId")
@@ -47,6 +48,7 @@ namespace the_third_cms_api.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Url")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

@@ -17,8 +17,9 @@ namespace the_third_cms_api.Migrations
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     ModifiedAt = table.Column<DateTime>(nullable: false),
                     ItemId = table.Column<int>(nullable: false),
-                    ItemData = table.Column<string>(nullable: true),
-                    ItemType = table.Column<int>(nullable: false)
+                    ItemData = table.Column<string>(nullable: false),
+                    ItemType = table.Column<int>(nullable: false),
+                    Url = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

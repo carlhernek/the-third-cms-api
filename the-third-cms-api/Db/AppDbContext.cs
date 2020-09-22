@@ -9,14 +9,15 @@ namespace the_third_cms_api.Db
 {
     public class AppDbContext : DbContext
     {
-
+#nullable disable
         public DbSet<CmsItem> CmsItems { get; set; }
 
-
+#nullable enable
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
            : base(options)
         {
+
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -30,13 +31,16 @@ namespace the_third_cms_api.Db
             builder.Ignore<BaseModel>();
             builder.Ignore<IBaseModel>();
 
+            //builder.Entity<CmsItem>().ToTable("CmsItems").HasKey(ct => ct.Id);
+
+            //builder.Entity<CmsItem>().HasDiscriminator<ItemType>().HasValue(ItemType.Image).HasValue(ItemType.Text);
 
 
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            foreach (var entry in ChangeTracker.Entries<BaseModel>())
+            foreach (var entry in ChangeTracker.Entries<CmsItem>())
             {
                 switch (entry.State)
                 {
@@ -52,7 +56,7 @@ namespace the_third_cms_api.Db
                 }
             }
 
-            return SaveChangesAsync();
+            return base.SaveChangesAsync(cancellationToken);
 
 
         }

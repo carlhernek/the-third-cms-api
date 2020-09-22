@@ -10,8 +10,8 @@ using the_third_cms_api.Db;
 namespace the_third_cms_api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200921120852_Url")]
-    partial class Url
+    [Migration("20200922140606_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,6 +34,7 @@ namespace the_third_cms_api.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ItemData")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ItemId")
@@ -49,6 +50,7 @@ namespace the_third_cms_api.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Url")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
