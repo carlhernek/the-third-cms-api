@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,13 @@ namespace the_third_cms_api
                 c.UseSqlServer(cs);
             });
 
+            services.AddOpenApiDocument();
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+
 
 
         }
@@ -38,9 +46,11 @@ namespace the_third_cms_api
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseHttpsRedirection();
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseRouting();
 
             app.UseAuthorization();

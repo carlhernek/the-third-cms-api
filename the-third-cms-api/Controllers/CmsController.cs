@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using the_third_cms_api.Db;
 using the_third_cms_api.Models;
@@ -9,24 +10,19 @@ using the_third_cms_api.Models;
 
 namespace the_third_cms_api.Controllers
 {
-    [Route("[controller]")]
+
+    [Route("api/[controller]")]
     public class CmsController : BaseController
     {
         private readonly AppDbContext DbContext;
-
+        public Microsoft.EntityFrameworkCore.DbSet<CmsItem> CmsItems { get; set; }
 
 
         public CmsController(AppDbContext dbContext)
         {
             this.DbContext = dbContext;
 
-            for (int i = 0; i < 10; i++)
-            {
-                this.DbContext.Add(new CmsItem { Id = Guid.NewGuid(), ItemData = "Test", ItemId = i * 1000, Url = "**" });
-            }
 
-            DbContext.SaveChanges();
-            
 
 
         }
@@ -38,7 +34,8 @@ namespace the_third_cms_api.Controllers
         [HttpGet]
         public IEnumerable<CmsItem> Get()
         {
-            return DbContext.CmsItems.ToList();
+            return this.DbContext.CmsItems.ToList();
+            //return items.AsEnumerable<CmsItem>();
         }
 
         // GET api/<CmsController>/5
@@ -50,9 +47,16 @@ namespace the_third_cms_api.Controllers
 
         // POST api/<CmsController>
         [HttpPost]
-        public void Post([FromBody] CmsItem value)
+        public void Post([FromBody] CmsItemVm value)
         {
-            DbContext.CmsItems.Add(value);
+            //var json = JsonSerializer.Deserialize(value, typeof(CmsItem));
+            var cmsitem = new CmsItem
+            {
+                ItemData = value.ItemData,
+                ItemId = value.ItemId,
+                ItemType = value.ItemType
+            };
+            DbContext.CmsItems.Add(cmsitem);
         }
 
 
