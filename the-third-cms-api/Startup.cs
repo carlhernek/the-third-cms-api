@@ -28,11 +28,13 @@ namespace the_third_cms_api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            var cs = Configuration["ConnectionStrings:DefaultConnectionString"];
+            var dbcs = (Convert.ToBoolean(Configuration["useDockerDb"])) ? Configuration["ConnectionStrings:InDockerDbConnectionString"] : Configuration["ConnectionStrings:DefaultConnectionString"];
+
             services.AddDbContextPool<AppDbContext>(c =>
             {
-                c.UseSqlServer(cs);
+                c.UseSqlServer(dbcs);
             });
+            services.AddTransient<IDbSeeder, DbSeeder>();
             services.AddHealthChecks();
             services.AddOpenApiDocument();
 

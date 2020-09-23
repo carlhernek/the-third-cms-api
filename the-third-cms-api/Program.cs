@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using the_third_cms_api.Db;
 
 namespace the_third_cms_api
 {
@@ -13,7 +10,20 @@ namespace the_third_cms_api
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+            var scope = host.Services.CreateScope();
+            //Try seed db.
+            try
+            {
+                var dbSeeder = (DbSeeder)scope.ServiceProvider.GetRequiredService<IDbSeeder>();
+
+                dbSeeder.SeedDb(scope.ServiceProvider);
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
