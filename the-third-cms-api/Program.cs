@@ -11,20 +11,25 @@ namespace the_third_cms_api
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-            var scope = host.Services.CreateScope();
-            //Try seed db.
-            try
-            {
-                var dbSeeder = (DbSeeder)scope.ServiceProvider.GetRequiredService<IDbSeeder>();
+            //var scope = host.Services.CreateScope();
+            ////Try seed db.
+            //try
+            //{
+            //    var dbSeeder = (DbSeeder)scope.ServiceProvider.GetRequiredService<IDbSeeder>();
 
-                dbSeeder.SeedDb(scope.ServiceProvider);
+            //    dbSeeder.SeedDb(scope.ServiceProvider);
 
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    throw e;
+            //}
+
+            host.Run();
+
         }
+
+
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)

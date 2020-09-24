@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>the_third_cms_api</RootNamespace>
-    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <!--<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>-->
     <Nullable>enable</Nullable>
     <WarningsAsErrors>nullable</WarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
